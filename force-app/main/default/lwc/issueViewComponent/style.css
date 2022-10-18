@@ -1,0 +1,21 @@
+.myTable table>thead .slds-cell-fixed.slds-has-button-menu{
+    background: #6A6AF7;
+    background-color: #6A6AF7;
+    color: #F4F4F9;
+ }
+ .myTable .slds-th__action {  background: #6A6AF7; }
+ .slds-button__icon, .slds-th__action-button {
+    color: #F4F4F9;
+ }
+ .THIS .new_issue_button {
+    background-color:#6A6AF7 !important;
+    color: #6A6AF7 !important;
+ }
+ .slds-has-focus.slds-is-resizable .slds-th__action, .slds-has-focus.slds-is-resizable .slds-th__action:focus, .slds-has-focus.slds-is-resizable .slds-th__action:hover, .slds-has-focus.slds-is-resizable .slds-th__action:focus:hover, .slds-is-resizable .slds-th__action:focus, .slds-is-resizable .slds-th__action:focus:hover{
+    background: #6A6AF7;
+    background-color: #6A6AF7;
+}
+.slds-is-sortable .slds-th__action:hover, .slds-is-sortable .slds-th__action:focus, .slds-is-sortable.slds-has-focus .slds-th__action, .slds-is-sortable.slds-has-focus .slds-th__action:hover, .slds-is-sortable.slds-has-focus .slds-th__action:focus {
+    background: #6A6AF7;
+    background-color: #6A6AF7;
+}

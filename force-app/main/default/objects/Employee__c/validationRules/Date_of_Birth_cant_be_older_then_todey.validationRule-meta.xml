@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Date_of_Birth_cant_be_older_then_todey</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(  Date_of_birth__c &gt; TODAY() ,true ,false)</errorConditionFormula>
+    <errorDisplayField>Date_of_birth__c</errorDisplayField>
+    <errorMessage>Date cant be older then today</errorMessage>
+</ValidationRule>

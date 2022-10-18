@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Head_of_Project_required</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF( ISBLANK( Company__c ), false,  IF(ISBLANK( Head_of_Project__c ), true, false) )</errorConditionFormula>
+    <errorDisplayField>Head_of_Project__c</errorDisplayField>
+    <errorMessage>If company selected, Head of project must be filed</errorMessage>
+</ValidationRule>
