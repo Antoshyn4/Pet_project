@@ -1,14 +1,4 @@
-public class TriggerHandler {
-	public void onBeforeInsert(List<Employee__c> newList){
-        List<Employee__c> updatedList = new List<Employee__c>();
-        
-        for (Employee__c emp : newList) {
-            if (!String.isBlank(emp.Current_Company__c) && String.isBlank(emp.Specialty__c)) {
-                emp.Specialty__c = 'Intern';
-            }
-        }
-    }
-
+public with sharing class CompanyTriggerHandler {
     public void onAfterUpdate(Map<Id,Company__c> newMap){
         Set<Id> budgetIds = new Set<Id>();
         for (Budget__c budgets : [SELECT Id FROM Budget__c WHERE Company__c IN :newMap.values()]) {

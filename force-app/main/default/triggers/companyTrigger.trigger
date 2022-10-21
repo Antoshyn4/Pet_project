@@ -1,8 +1,9 @@
 trigger companyTrigger on Company__c (after update) {
-    TriggerHandler handler = new TriggerHandler();
+    CompanyTriggerHandler handler = new CompanyTriggerHandler();
+    
     if (Trigger.isAfter) {
         if  (Trigger.isUpdate){
-            handler.onAfterUpdate(Trigger.newMap);
+            //handler.onAfterUpdate(Trigger.newMap);
         }
     }
 }

@@ -1,5 +1,5 @@
 trigger employeeTrigger on Employee__c (before insert) {
-	TriggerHandler triggerHandler = new TriggerHandler();
+	EmployeeTriggerHandler triggerHandler = new EmployeeTriggerHandler();
 
     if (Trigger.isBefore) {
         if (Trigger.isInsert) {
