@@ -1,17 +1,34 @@
 public with sharing class BudgetTriggerHandler {
 
+    @future
+
+    public static void futureBudgetUpdateMethod(List<Id> companyId){
+        List<AggregateResult> aggrResults = [SELECT COUNT(Id) budgetsCount, Company__r.Head_of_Company__c emp 
+        FROM Budget__c WHERE Company__c IN: companyId 
+        AND Active__c = true
+        GROUP BY Company__r.Head_of_Company__c];
+        List<Employee__c> updateEmployee = new List<Employee__c>();
+        System.debug('Test' + aggrResults);
+        for (AggregateResult aggRes : aggrResults) {
+            updateEmployee.add(new Employee__c(Id = (Id)aggRes.get('emp'), Count_of_bugets__c = (Decimal)aggRes.get('budgetsCount')));
+        }
+        if (!updateEmployee.isEmpty()) {
+            update updateEmployee;
+        }
+    }
+
     public void onAfterUpdate(Map<Id,Budget__c> newMap, Map<Id,Budget__c> oldMap){
-        List<Employee__c> updateEmployeeList = new List<Employee__c>();
+        List<Id> companyIdList = new List<Id>();
         for (Id budgetId : oldMap.keyset()) {
             if (newMap.get(budgetId).Active__c != oldMap.get(budgetId).Active__c) {
-                Id companyId = newMap.get(budgetId).Company__c;
-                Id employeeId = [SELECT Head_of_Company__c FROM Company__c WHERE Id =: companyId].Head_of_Company__c;
-                Integer count = Database.countQuery('SELECT COUNT() FROM Budget__c WHERE Company__c =: companyId AND Active__c = true');
-                updateEmployeeList.add(new Employee__c(Id = employeeId, Count_of_bugets__c = count));
+                companyIdList.add(newMap.get(budgetId).Company__c);
+            }	
+            if (newMap.get(budgetId).Last_Updated_Date__c != oldMap.get(budgetId).Last_Updated_Date__c) {
+                System.enqueueJob(new testQuebleName());
             }
         }
-        if (!updateEmployeeList.isEmpty()) {
-            update updateEmployeeList;
+        if (!companyIdList.isEmpty()) {
+            BudgetTriggerHandler.futureBudgetUpdateMethod(companyIdList);
         }
     }
 
